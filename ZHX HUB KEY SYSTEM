@@ -138,3 +138,5 @@ VerifyBtn.MouseButton1Click:Connect(function()
 end)
 
 print("Key System Loaded. Key is: " .. CorrectKey)
+
+local url ="https://raw.githubusercontent.com/XxDEMONxXscripts/PTK-CLAN-SCRIPT./refs/heads/main/PTK%20CLAN%20SCRIPT"
