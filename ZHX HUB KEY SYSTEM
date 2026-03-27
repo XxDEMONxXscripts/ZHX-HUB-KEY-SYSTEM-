@@ -1,46 +1,140 @@
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+-- ZHX HUB KEY SYSTEM | MADE BY XxDEMONxX 
+-- Theme: Purple Gradient | Features: Loading Animation
 
-local Window = Rayfield:CreateWindow({
-   Name = "ZHXONTOP | Key System",
-   LoadingTitle = "ZHXONTOP v1.0",
-   LoadingSubtitle = "by discord.gg/zhxontop",
-   ConfigurationSaving = {
-      Enabled = false
-   },
-   KeySystem = true, -- Set this to true to use their built-in system
-   KeySettings = {
-      Title = "ZHXONTOP | Key Required",
-      Subtitle = "Enter your key below",
-      Note = "Join the discord for the key!",
-      FileName = "ZHXKey", 
-      SaveKey = true, 
-      GrabKeyFromSite = false, -- Set to true if using a raw pastebin link
-      Key = {"ZHXONTOP"} -- This is the actual key
-   }
-})
+local TweenService = game:GetService("TweenService")
+local CoreGui = game:GetService("CoreGui")
 
--- The Main Tab (Appears after successful key entry)
-local MainTab = Window:CreateTab("Home", 4483362458) 
+-- Configuration
+local CorrectKey = "ZHXONTOP" -- Change this to your desired key
 
-Rayfield:Notify({
-   Title = "Success",
-   Content = "Key Accepted! Welcome to ZHXONTOP.",
-   Duration = 5,
-   Image = 4483362458,
-   Actions = { 
-      Ignore = {
-         Name = "Okay!",
-         Callback = function()
-            print("User acknowledged.")
-         end
-      },
-   },
-})
+-- UI Setup
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "ZHX Hub KeySystem | made by XxDEMONxX "
+ScreenGui.Parent = CoreGui
+ScreenGui.ResetOnSpawn = false
 
--- Example Button
-local Button = MainTab:CreateButton({
-   Name = "Print Hello World",
-   Callback = function()
-      print("Hello World!")
-   end,
-})
+-- Main Frame
+local Main = Instance.new("Frame")
+Main.Name = "Main"
+Main.Parent = ScreenGui
+Main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.5, -150, 0.5, -100)
+Main.Size = UDim2.new(0, 300, 0, 200)
+Main.ClipsDescendants = true
+
+-- Purple Gradient
+local UIGradient = Instance.new("UIGradient")
+UIGradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(48, 0, 96)), -- Deep Purple
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(147, 51, 234)) -- Bright Violet
+}
+UIGradient.Rotation = 45
+UIGradient.Parent = Main
+
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 12)
+UICorner.Parent = Main
+
+-- Title
+local Title = Instance.new("TextLabel")
+Title.Parent = Main
+Title.BackgroundTransparency = 1
+Title.Size = UDim2.new(1, 0, 0, 50)
+Title.Font = Enum.Font.SourceSansBold
+Title.Text = "XxDEMONxX KEY SYSTEM"
+Title.TextColor3 = Color3.new(1, 1, 1)
+Title.TextSize = 20
+
+-- Key Input
+local TextBox = Instance.new("TextBox")
+TextBox.Parent = Main
+TextBox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.BackgroundTransparency = 0.6
+TextBox.Position = UDim2.new(0.1, 0, 0.35, 0)
+TextBox.Size = UDim2.new(0.8, 0, 0, 35)
+TextBox.Font = Enum.Font.SourceSans
+TextBox.PlaceholderText = "Enter Key Here..."
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.new(1, 1, 1)
+TextBox.TextSize = 16
+
+local UICorner2 = Instance.new("UICorner")
+UICorner2.CornerRadius = UDim.new(0, 8)
+UICorner2.Parent = TextBox
+
+-- Verify Button
+local VerifyBtn = Instance.new("TextButton")
+VerifyBtn.Parent = Main
+VerifyBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+VerifyBtn.BackgroundTransparency = 0.9
+VerifyBtn.Position = UDim2.new(0.1, 0, 0.65, 0)
+VerifyBtn.Size = UDim2.new(0.8, 0, 0, 40)
+VerifyBtn.Font = Enum.Font.SourceSansBold
+VerifyBtn.Text = "Verify Key"
+VerifyBtn.TextColor3 = Color3.new(1, 1, 1)
+VerifyBtn.TextSize = 18
+
+local UICorner3 = Instance.new("UICorner")
+UICorner3.CornerRadius = UDim.new(0, 8)
+UICorner3.Parent = VerifyBtn
+
+-- Loading Overlay (Hidden initially)
+local LoadingFrame = Instance.new("Frame")
+LoadingFrame.Parent = Main
+LoadingFrame.Size = UDim2.new(1, 0, 1, 0)
+LoadingFrame.BackgroundColor3 = Color3.fromRGB(20, 0, 40)
+LoadingFrame.BackgroundTransparency = 1
+LoadingFrame.Visible = false
+LoadingFrame.ZIndex = 5
+
+local LoadingText = Instance.new("TextLabel")
+LoadingText.Parent = LoadingFrame
+LoadingText.Size = UDim2.new(1, 0, 1, 0)
+LoadingText.BackgroundTransparency = 1
+LoadingText.Text = "Checking Key..."
+LoadingText.TextColor3 = Color3.new(1, 1, 1)
+LoadingText.Font = Enum.Font.SourceSansItalic
+LoadingText.TextSize = 22
+LoadingText.ZIndex = 6
+
+-- Functionality
+VerifyBtn.MouseButton1Click:Connect(function()
+    local input = TextBox.Text
+    
+    -- Show Loading
+    VerifyBtn.Active = false
+    LoadingFrame.Visible = true
+    TweenService:Create(LoadingFrame, TweenInfo.new(0.5), {BackgroundTransparency = 0.2}):Play()
+    
+    -- Animated "Loading..." text
+    task.spawn(function()
+        while LoadingFrame.Visible do
+            LoadingText.Text = "Checking." task.wait(0.3)
+            LoadingText.Text = "Checking.." task.wait(0.3)
+            LoadingText.Text = "Checking..." task.wait(0.3)
+        end
+    end)
+
+    task.wait(3) -- Loading Duration
+
+    if input == CorrectKey then
+        LoadingText.Text = "ACCESS GRANTED"
+        LoadingText.TextColor3 = Color3.fromRGB(0, 255, 127)
+        task.wait(1)
+        ScreenGui:Destroy()
+        -- Put your script execution here!
+        print("Logged in as XxDEMONxX")
+    else
+        LoadingText.Text = "INVALID KEY!"
+        LoadingText.TextColor3 = Color3.fromRGB(255, 50, 50)
+        task.wait(1.5)
+        -- Hide Loading
+        TweenService:Create(LoadingFrame, TweenInfo.new(0.5), {BackgroundTransparency = 1}):Play()
+        task.wait(0.5)
+        LoadingFrame.Visible = false
+        VerifyBtn.Active = true
+    end
+end)
+
+print("Key System Loaded. Key is: " .. CorrectKey)
