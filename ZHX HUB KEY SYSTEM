@@ -1,15 +1,15 @@
--- Key System by XxDEMONxX
+-- PTK key system | made by XxDEMONxX 
 -- Theme: Purple Gradient | Features: Loading Animation
 
 local TweenService = game:GetService("TweenService")
 local CoreGui = game:GetService("CoreGui")
 
 -- Configuration
-local CorrectKey = "XxDEMONxX-TOP-SECRET" -- Change this to your desired key
+local CorrectKey = "PTKONTOP" -- Change this to your desired key
 
 -- UI Setup
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "XxDEMONxX_KeySystem"
+ScreenGui.Name = "PTK key system | made by XxDEMONxX "
 ScreenGui.Parent = CoreGui
 ScreenGui.ResetOnSpawn = false
 
