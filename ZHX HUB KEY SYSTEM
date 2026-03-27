@@ -1,0 +1,46 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "ZHXONTOP | Key System",
+   LoadingTitle = "ZHXONTOP v1.0",
+   LoadingSubtitle = "by discord.gg/zhxontop",
+   ConfigurationSaving = {
+      Enabled = false
+   },
+   KeySystem = true, -- Set this to true to use their built-in system
+   KeySettings = {
+      Title = "ZHXONTOP | Key Required",
+      Subtitle = "Enter your key below",
+      Note = "Join the discord for the key!",
+      FileName = "ZHXKey", 
+      SaveKey = true, 
+      GrabKeyFromSite = false, -- Set to true if using a raw pastebin link
+      Key = {"ZHXONTOP"} -- This is the actual key
+   }
+})
+
+-- The Main Tab (Appears after successful key entry)
+local MainTab = Window:CreateTab("Home", 4483362458) 
+
+Rayfield:Notify({
+   Title = "Success",
+   Content = "Key Accepted! Welcome to ZHXONTOP.",
+   Duration = 5,
+   Image = 4483362458,
+   Actions = { 
+      Ignore = {
+         Name = "Okay!",
+         Callback = function()
+            print("User acknowledged.")
+         end
+      },
+   },
+})
+
+-- Example Button
+local Button = MainTab:CreateButton({
+   Name = "Print Hello World",
+   Callback = function()
+      print("Hello World!")
+   end,
+})
